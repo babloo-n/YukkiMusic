@@ -12,13 +12,14 @@ import string
 from ast import ExceptHandler
 
 from pyrogram import filters
-from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto,
+from pyrogram.types import (InlineKeyboardMarkup, InputMediaPhoto, InlineKeyboardButton, 
                             Message)
 from pytgcalls.exceptions import NoActiveGroupCall
 
 import config
 from config import BANNED_USERS, lyrical
 from strings import get_command
+from strings.filters import command
 from YukkiMusic import (Apple, Resso, SoundCloud, Spotify, Telegram,
                         YouTube, app)
 from YukkiMusic.core.call import Yukki
@@ -35,12 +36,30 @@ from YukkiMusic.utils.inline.playlist import botplaylist_markup
 from YukkiMusic.utils.logger import play_logs
 from YukkiMusic.utils.stream.stream import stream
 
+
+force_btn = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(   
+              text=f"➪︎𝐒𝐎𝐔𝐑𝐂𝐄 𝐁𝐀𝐁𝑳𝐎𝐎⚙", url=f"https://t.me/BA_BLOO",)                        
+        ],        
+    ]
+)
+async def check_is_joined(message):   
+    try:
+        userid = message.from_user.id
+        status = await app.get_chat_member(f"BA_BLOO", userid)
+        return True
+    except Exception:
+        await message.reply_text("**إضــغــط لــي الاشــتــراك 🎗\nBA_BLOO.t.me**",reply_markup=force_btn,parse_mode="markdown",disable_web_page_preview=False)
+        return False
+      
 # Command
 PLAY_COMMAND = get_command("PLAY_COMMAND")
 
 
 @app.on_message(
-    filters.command(["تشغيل","شغل"])
+    command(["تشغيل","شغل"])
     & filters.group
     & ~filters.edited
     & ~BANNED_USERS

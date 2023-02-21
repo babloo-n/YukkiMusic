@@ -11,6 +11,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from config import BANNED_USERS
+from strings.filters import command
 from strings import get_command
 from YukkiMusic import app
 from YukkiMusic.core.call import Yukki
@@ -23,6 +24,12 @@ STOP_COMMAND = get_command("STOP_COMMAND")
 
 @app.on_message(
     filters.command(STOP_COMMAND)
+    & filters.group
+    & ~filters.edited
+    & ~BANNED_USERS
+)
+@app.on_message(
+    command(["ايقاف","انهاء"])
     & filters.group
     & ~filters.edited
     & ~BANNED_USERS

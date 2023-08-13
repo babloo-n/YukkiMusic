@@ -58,7 +58,7 @@ UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
     "https://github.com/babloo-n/YukkiMusic",
 )
-UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "origin")
+UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "master")
 
 # GIT TOKEN ( if your edited repo is private)
 GIT_TOKEN = getenv("GIT_TOKEN", None)

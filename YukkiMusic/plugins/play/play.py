@@ -38,22 +38,6 @@ from YukkiMusic.utils.stream.stream import stream
 
 
 
-force_btn = InlineKeyboardMarkup(
-    [
-        [
-            InlineKeyboardButton(   
-              text=f"➪︎𝐒𝙾𝐔𝐑𝘾𝐄 𝐁𝐀𝐁ℓ𝐎𝐎⚡️", url=f"https://t.me/BA_BLOO",)                        
-        ],        
-    ]
-)
-async def check_is_joined(message):    
-    try:
-        userid = message.from_user.id
-        status = await app.get_chat_member(f"BA_BLOO", userid)
-        return True
-    except Exception:
-        await message.reply_text("**إضــغــط لــي الاشــتــراك 🎗\nBA_BLOO.t.me**",reply_markup=force_btn,parse_mode="markdown",disable_web_page_preview=False)
-        return False
       
 # Command
 PLAY_COMMAND = get_command("PLAY_COMMAND")
